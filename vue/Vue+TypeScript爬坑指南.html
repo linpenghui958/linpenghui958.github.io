@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Vue + TypeScript踩坑(初始化项目) | 林小辉的blog</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="Just recrod something">
+    
+    <link rel="preload" href="/assets/css/0.styles.35bcedcf.css" as="style"><link rel="preload" href="/assets/js/app.5d71a1c6.js" as="script"><link rel="preload" href="/assets/js/2.c183a324.js" as="script"><link rel="preload" href="/assets/js/25.9c5b0a09.js" as="script"><link rel="prefetch" href="/assets/js/10.dcea7a3e.js"><link rel="prefetch" href="/assets/js/11.c7f66434.js"><link rel="prefetch" href="/assets/js/12.de03b6e0.js"><link rel="prefetch" href="/assets/js/13.d9910249.js"><link rel="prefetch" href="/assets/js/14.fafe36af.js"><link rel="prefetch" href="/assets/js/15.03949b40.js"><link rel="prefetch" href="/assets/js/16.05df2604.js"><link rel="prefetch" href="/assets/js/17.fa250f32.js"><link rel="prefetch" href="/assets/js/18.a5e0229d.js"><link rel="prefetch" href="/assets/js/19.4183787b.js"><link rel="prefetch" href="/assets/js/20.90ed0136.js"><link rel="prefetch" href="/assets/js/21.cd3b3939.js"><link rel="prefetch" href="/assets/js/22.3050d27e.js"><link rel="prefetch" href="/assets/js/23.d2874efe.js"><link rel="prefetch" href="/assets/js/24.79cca016.js"><link rel="prefetch" href="/assets/js/26.69d37c61.js"><link rel="prefetch" href="/assets/js/27.c6142c6d.js"><link rel="prefetch" href="/assets/js/3.e88f59e6.js"><link rel="prefetch" href="/assets/js/4.24aaf822.js"><link rel="prefetch" href="/assets/js/5.0f611b7f.js"><link rel="prefetch" href="/assets/js/6.148a2419.js"><link rel="prefetch" href="/assets/js/7.1ab69c09.js"><link rel="prefetch" href="/assets/js/8.c66ae691.js"><link rel="prefetch" href="/assets/js/9.4438a384.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.35bcedcf.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">林小辉的blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="https://www.zhihu.com/column/linxiaohui" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  知乎
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><a href="https://github.com/linpenghui958" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="https://www.zhihu.com/column/linxiaohui" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  知乎
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><a href="https://github.com/linpenghui958" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Flutter相关</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Vue2.0</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue/编译.html" class="sidebar-link">编译</a></li><li><a href="/vue/数据驱动.html" class="sidebar-link">数据驱动</a></li><li><a href="/vue/响应式原理.html" class="sidebar-link">深入响应式原理</a></li><li><a href="/vue/组件化.html" class="sidebar-link">组件化</a></li><li><a href="/vue/Vue+ts下的vw适配（第三方库css问题）.html" class="sidebar-link">Vue + ts 下的vw适配（第三方库css问题）</a></li><li><a href="/vue/Vue+TypeScript爬坑指南.html" class="active sidebar-link">Vue + TypeScript踩坑(初始化项目)</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>面试</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>JavaScript</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>其他</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="vue-typescript踩坑-初始化项目"><a href="#vue-typescript踩坑-初始化项目" class="header-anchor">#</a> Vue + TypeScript踩坑(初始化项目)</h3> <hr> <ul><li>前言，最近公司新项目需要进行重构，框架选择为Vue+TypeScript，记录初始化中不完全踩坑指南
+<br></li></ul> <h5 id="_1-项目改造"><a href="#_1-项目改造" class="header-anchor">#</a> 1.项目改造</h5> <p>安装所需的插件
+<code>npm install vue-property-decorator vuex-class --save</code> <code>npm install ts-loader typescript typescript-eslint-parser --save-dev</code> <br>
+这些库的作用，可以按需引入</p> <ul><li><a href="https://github.com/kaorun343/vue-property-decorator" title="vue-property-decorator" target="_blank" rel="noopener noreferrer">vue-property-decorator<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>：在vue-class-component的基础上优化{Emit, Inject, Model, Prop, Provide, Watch, Component}</li> <li><a href="https://github.com/ktsn/vuex-class" title="vuex-class" target="_blank" rel="noopener noreferrer">vuex-class<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>：ts版的vuex插件</li> <li>ts-loader: webpack插件</li> <li>typescript： 必备插件</li> <li>typescript-eslint-parser： eslint解析ts插件</li></ul> <br>
+##### 2.WebPack配置修改
+webpac.conf中添加ts的解析module
+extensions中添加ts结尾的文件
+<div class="language- extra-class"><pre><code>entry: {
+	app: './src/main.ts'
+},
+// ....
+extensions: ['.js', '.vue', '.json', '.ts'],
+// ....
+{
+    test: /\.ts$/,
+    loader: 'ts-loader',
+    exclude: /node_modules/,
+    options: {
+      appendTsSuffixTo: [/\.vue$/],
+    }
+}
+</code></pre></div><h5 id="_3-添加tsconfig-json、d-ts文件-修改eslint"><a href="#_3-添加tsconfig-json、d-ts文件-修改eslint" class="header-anchor">#</a> 3.添加tsconfig.json、d.ts文件，修改eslint</h5> <p>修改eslint解析规则为ts</p> <div class="language- extra-class"><pre><code>// ...
+parserOptions: {
+	parser: 'typescript-eslint-parser'
+},
+// ...
+ plugins: [
+    'vue',
+    'typescript'
+],
+</code></pre></div><p>在.eslintrc.js同级目录创建tsconfig.json文件</p> <div class="language- extra-class"><pre><code>{
+  &quot;include&quot;: [
+    &quot;src/*&quot;,
+    &quot;src/**/*&quot;
+  ],
+  &quot;exclude&quot;: [
+    &quot;node_modules&quot;
+  ],
+  &quot;compilerOptions&quot;: {
+    // types option has been previously configured
+    &quot;types&quot;: [
+      // add node as an option
+      &quot;node&quot;
+    ],
+    // typeRoots option has been previously configured
+    &quot;typeRoots&quot;: [
+      // add path to @types
+      &quot;node_modules/@types&quot;
+    ],
+    // 以严格模式解析
+    &quot;strict&quot;: true,
+    &quot;strictPropertyInitialization&quot;: false,
+    // 在.tsx文件里支持JSX
+    &quot;jsx&quot;: &quot;preserve&quot;,
+    // 使用的JSX工厂函数
+    &quot;jsxFactory&quot;: &quot;h&quot;,
+    // 允许从没有设置默认导出的模块中默认导入
+    &quot;allowSyntheticDefaultImports&quot;: true,
+    // 启用装饰器
+    &quot;experimentalDecorators&quot;: true,
+    &quot;strictFunctionTypes&quot;: false,
+    // 允许编译javascript文件
+    &quot;allowJs&quot;: true,
+    // 采用的模块系统
+    &quot;module&quot;: &quot;esnext&quot;,
+    // 编译输出目标 ES 版本
+    &quot;target&quot;: &quot;es5&quot;,
+    // 如何处理模块
+    &quot;moduleResolution&quot;: &quot;node&quot;,
+    // 在表达式和声明上有隐含的any类型时报错
+    &quot;noImplicitAny&quot;: true,
+    &quot;lib&quot;: [
+      &quot;dom&quot;,
+      &quot;es5&quot;,
+      &quot;es6&quot;,
+      &quot;es7&quot;,
+      &quot;es2015.promise&quot;
+    ],
+    &quot;sourceMap&quot;: true,
+    &quot;pretty&quot;: true
+  }
+}
+</code></pre></div><p>在src目录下添加/typings/vue-shims.d.ts，声明所有的.vue文件</p> <div class="language- extra-class"><pre><code>declare module &quot;*.vue&quot; {
+  import Vue from &quot;vue&quot;;
+  export default Vue;
+}
+</code></pre></div><br> <h5 id="_4-对原有文件进行改造"><a href="#_4-对原有文件进行改造" class="header-anchor">#</a> 4.对原有文件进行改造</h5> <p>/src/router/index.ts</p> <div class="language- extra-class"><pre><code>import Vue, { AsyncComponent } from 'vue'
+import Router, { RouteConfig, Route, NavigationGuard } from 'vue-router'
+const Home: AsyncComponent = (): any =&gt; import('@/views/Home/index.vue')
+
+Vue.use(Router)
+
+const routes: RouteConfig[] = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  }
+]
+
+const router: Router = new Router({
+  mode: 'history',
+  base: '/',
+  routes
+})
+
+export default router
+</code></pre></div><p>/src/store
+index.ts</p> <div class="language- extra-class"><pre><code>import Vue from 'vue'
+import Vuex, {ActionTree, MutationTree} from 'vuex'
+import actions from './actions'
+import mutations from './mutations';
+import getters from './getters'
+
+Vue.use(Vuex)
+
+interface State {
+  token: string,
+  login: Boolean,
+}
+
+let state: State = {
+  token: 'token',
+  login: false
+}
+
+export default new Vuex.Store({
+  state,
+  getters,
+  mutations,
+  actions
+})
+</code></pre></div><p>mutations.ts</p> <div class="language- extra-class"><pre><code>import TYPES from './types'
+import { MutationTree } from 'vuex'
+
+const mutations: MutationTree&lt;any&gt; = {
+  [TYPES.SET_TOKEN](state, token): void{
+    state.token = token
+  }
+}
+
+export default mutations
+</code></pre></div><p>actions.ts</p> <div class="language- extra-class"><pre><code>import { ActionTree } from 'vuex'
+import TYPES from './types'
+
+const actions: ActionTree&lt;any, any&gt; = {
+  
+  initToken({commit}, token: string) {
+    commit(TYPES.SET_TOKEN, token)
+  }
+}
+</code></pre></div><p>export default actions</p> <p>/src/main.ts</p> <div class="language- extra-class"><pre><code>import Vue from 'vue';
+import App from './App.vue';
+import store from './store'
+import router from './router';
+
+Vue.config.productionTip = false
+
+new Vue({
+  el: '#app',
+  router,
+  store,
+  components: { App },
+  template: '&lt;App/&gt;'
+})
+</code></pre></div><br>
+##### 5.vue-property-decorator使用
+<p>vue-property-decorator基于vue-class-component封装
+提供了7种方法
+<code>import {Emit, Inject, Model, Prop, Provide, Watch, Componet}</code></p> <div class="language- extra-class"><pre><code>&lt;script lang=&quot;ts&quot;&gt;
+import Vue from 'vue'
+import {Component, Prop, Emit} from 'vue-property-decorator'
+
+interface List {
+  title: string,
+  imgSrc: string,
+  url?: string
+}
+
+@Component({
+	name: 'HomeBlock',
+	component: {
+		// 这里注册组件
+	}
+})
+export default class HomeBlock extends Vue  {
+  @Prop({default: []})
+  dataList: List[]
+  // 等同于
+  // props: {
+  //  dataList: {
+  // 	default: [],
+  //	type: Array
+  //   }
+  //}
+
+  @Emit('jump')
+  jumpRoute(url: string){
+	// ...
+  }
+  // 等同于
+  // jumpRoute(url) {
+  // 	this.$emit('jump', url)
+  // }
+  
+  @Watch('child')
+  onChildChanged(val: string, oldVal: string) { }
+  // 等同于
+  // watch: {
+  //   'child': {
+  //     handler: 'onChildChanged',
+  //     immediate: false,
+  //     deep: false
+  //   },
+  // }
+  mounted() {
+    console.log(this.dataList)
+  }
+}
+&lt;/script&gt;
+</code></pre></div><p>&lt;br / &gt;</p> <h5 id="错误汇总"><a href="#错误汇总" class="header-anchor">#</a> 错误汇总</h5> <ol><li>typescript版本过新为3.1.x的情况会提示无法找到vue-loader，需要降级到2.8.x</li> <li>TS2564:Property 'xx' has no initializer and in not definitely assigned in constructor
+在ts新版本中加入的，属性初始化可能为undefined的情况需要考虑进去
+解决方案1，在定义的时候例如 url: string | undefined （不太清楚方法要怎么定义，ts不太熟）
+解决方案2，在tsconfig的compilerOptions中 添加<code>&quot;strictPropertyInitialization&quot;: false,</code></li></ol></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vue/Vue+ts下的vw适配（第三方库css问题）.html" class="prev">
+        Vue + ts 下的vw适配（第三方库css问题）
+      </a></span> <span class="next"><a href="/interview/2019面试.html">
+        /interview/2019面试.html
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.5d71a1c6.js" defer></script><script src="/assets/js/2.c183a324.js" defer></script><script src="/assets/js/25.9c5b0a09.js" defer></script>
+  </body>
+</html>

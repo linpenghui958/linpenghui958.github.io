@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>2019前端性能优化 一 | 林小辉的blog</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="Just recrod something">
+    
+    <link rel="preload" href="/assets/css/0.styles.35bcedcf.css" as="style"><link rel="preload" href="/assets/js/app.5d71a1c6.js" as="script"><link rel="preload" href="/assets/js/2.c183a324.js" as="script"><link rel="preload" href="/assets/js/16.05df2604.js" as="script"><link rel="prefetch" href="/assets/js/10.dcea7a3e.js"><link rel="prefetch" href="/assets/js/11.c7f66434.js"><link rel="prefetch" href="/assets/js/12.de03b6e0.js"><link rel="prefetch" href="/assets/js/13.d9910249.js"><link rel="prefetch" href="/assets/js/14.fafe36af.js"><link rel="prefetch" href="/assets/js/15.03949b40.js"><link rel="prefetch" href="/assets/js/17.fa250f32.js"><link rel="prefetch" href="/assets/js/18.a5e0229d.js"><link rel="prefetch" href="/assets/js/19.4183787b.js"><link rel="prefetch" href="/assets/js/20.90ed0136.js"><link rel="prefetch" href="/assets/js/21.cd3b3939.js"><link rel="prefetch" href="/assets/js/22.3050d27e.js"><link rel="prefetch" href="/assets/js/23.d2874efe.js"><link rel="prefetch" href="/assets/js/24.79cca016.js"><link rel="prefetch" href="/assets/js/25.9c5b0a09.js"><link rel="prefetch" href="/assets/js/26.69d37c61.js"><link rel="prefetch" href="/assets/js/27.c6142c6d.js"><link rel="prefetch" href="/assets/js/3.e88f59e6.js"><link rel="prefetch" href="/assets/js/4.24aaf822.js"><link rel="prefetch" href="/assets/js/5.0f611b7f.js"><link rel="prefetch" href="/assets/js/6.148a2419.js"><link rel="prefetch" href="/assets/js/7.1ab69c09.js"><link rel="prefetch" href="/assets/js/8.c66ae691.js"><link rel="prefetch" href="/assets/js/9.4438a384.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.35bcedcf.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">林小辉的blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="https://www.zhihu.com/column/linxiaohui" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  知乎
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><a href="https://github.com/linpenghui958" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="https://www.zhihu.com/column/linxiaohui" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  知乎
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><a href="https://github.com/linpenghui958" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Flutter相关</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Vue2.0</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>面试</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/interview/2019面试.html" class="sidebar-link">/interview/2019面试.html</a></li><li><a href="/interview/2019前端性能优化.html" class="active sidebar-link">2019前端性能优化 一</a></li><li><a href="/interview/手写js.html" class="sidebar-link">/interview/手写js.html</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>JavaScript</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>其他</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="_2019前端性能优化-一"><a href="#_2019前端性能优化-一" class="header-anchor">#</a> 2019前端性能优化 一</h3> <hr> <ul><li>起步：计划与指标
+1.建立性能评估规范
+2.目标：比你的对手快至少20%]
+3.选择合适的指标
+4.在目标用户的典型设备上收集数据
+5.为测试设立“纯净”、“接近真实用户”的浏览器配置
+6.与团队其他成员分享这份清单</li></ul> <h4 id="_1-建立性能评估规范"><a href="#_1-建立性能评估规范" class="header-anchor">#</a> 1.建立性能评估规范</h4> <p>需要开发、设计与业务、市场团队的共同合作，从而确定页面速度会如何影响业务指标和大家多关心的KPI。
+接着需要确定性能优化的指标，研究用户抱怨的常见问题，再看如何通过性能优化，接近这些问题。</p> <h4 id="_2-目标-比你的对手快至少20"><a href="#_2-目标-比你的对手快至少20" class="header-anchor">#</a> 2.目标：比你的对手快至少20%</h4> <p>如果你想比你的竞争对手快，至少要快20%。
+你可以通过Chrome UX Report来了解对手的性能，并为具体的页面设置性能目标。
+还有一点非常重要，那就是规划好加载的顺序和取舍。如果你预先规划好哪些部分更重要，并确定每部分的出现顺序，那么同事你也会知道哪些部分可以延迟加载。</p> <h4 id="_3-选择合适的指标"><a href="#_3-选择合适的指标" class="header-anchor">#</a> 3.选择合适的指标</h4> <p>这里有一些指标，首次绘制（First Paint）、首次有内容绘制（First Contentful Paint）、首次有意义绘制（First Meaning Paint）、视觉完备（Visual Complete）、首次可交互时间（Time To interactive）（ps：<a href="https://docs.google.com/presentation/d/1D4foHkE0VQdhcA5_hiesl8JhEGeTDRrQR4gipfJ8z7Y/present?slide=id.g21f3ab9dd6_0_33" target="_blank" rel="noopener noreferrer">区别<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>）
+通常情况被选用的，相对重要的指标有</p> <ul><li>首次有效绘制 First Meaning Paint <strong>FMP</strong></li> <li>首次可交互时间 Time to interactive <strong>TII</strong></li> <li>首次输入延迟 First Input Delay <strong>FID</strong></li> <li>速度指数 Speed Index</li> <li>CPU耗时</li> <li>广告的影响 Ad Weight Impact</li> <li>偏离度指标 Deviation metrics</li> <li>自定义指标 Custom metrics</li></ul> <h4 id="_4-在目标用户的典型设备上收集数据"><a href="#_4-在目标用户的典型设备上收集数据" class="header-anchor">#</a> 4.在目标用户的典型设备上收集数据</h4> <p>移动设备上的解析时间通常要比桌面设备长 36%。因此，一定要在一部平均水准的设备上进行测试 — 一部你的用户中最具代表性的设备。</p> <ul><li>集成测试工具可以在预先规定了设备和网络配置的可复制环境中手机实验数据。例如 Lighthouse、WebPageTest</li> <li>真是用户监测（RUM）工具可以持续评估用户交互，收集实际数据。例如，SpeedCurve、New Relic，两者也都提供集成测试工具。</li></ul> <p>####5.为测试设立“纯净”、“接近真实用户”的浏览器配置（Profile）
+使用被动测试监控工具时，可以关闭反病毒软件和CPU后台任务，关闭后台网络连接，使用没有安装任何插件的“干净的”浏览器配置，以避免结果失真。
+当然了解你的用户会使用哪些插件也是个不错的主意。</p> <p>####6.与团队其他成员共享这份清单
+使每个人熟悉，从而根据性能预算和清单中定义的优先级来制定设计决策。</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/interview/2019面试.html" class="prev">
+        /interview/2019面试.html
+      </a></span> <span class="next"><a href="/interview/手写js.html">
+        /interview/手写js.html
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.5d71a1c6.js" defer></script><script src="/assets/js/2.c183a324.js" defer></script><script src="/assets/js/16.05df2604.js" defer></script>
+  </body>
+</html>

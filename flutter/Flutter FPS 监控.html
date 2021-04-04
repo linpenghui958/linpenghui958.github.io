@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>如何获取Flutter APP的FPS | 林小辉的blog</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="Just recrod something">
+    
+    <link rel="preload" href="/assets/css/0.styles.35bcedcf.css" as="style"><link rel="preload" href="/assets/js/app.5d71a1c6.js" as="script"><link rel="preload" href="/assets/js/2.c183a324.js" as="script"><link rel="preload" href="/assets/js/13.d9910249.js" as="script"><link rel="prefetch" href="/assets/js/10.dcea7a3e.js"><link rel="prefetch" href="/assets/js/11.c7f66434.js"><link rel="prefetch" href="/assets/js/12.de03b6e0.js"><link rel="prefetch" href="/assets/js/14.fafe36af.js"><link rel="prefetch" href="/assets/js/15.03949b40.js"><link rel="prefetch" href="/assets/js/16.05df2604.js"><link rel="prefetch" href="/assets/js/17.fa250f32.js"><link rel="prefetch" href="/assets/js/18.a5e0229d.js"><link rel="prefetch" href="/assets/js/19.4183787b.js"><link rel="prefetch" href="/assets/js/20.90ed0136.js"><link rel="prefetch" href="/assets/js/21.cd3b3939.js"><link rel="prefetch" href="/assets/js/22.3050d27e.js"><link rel="prefetch" href="/assets/js/23.d2874efe.js"><link rel="prefetch" href="/assets/js/24.79cca016.js"><link rel="prefetch" href="/assets/js/25.9c5b0a09.js"><link rel="prefetch" href="/assets/js/26.69d37c61.js"><link rel="prefetch" href="/assets/js/27.c6142c6d.js"><link rel="prefetch" href="/assets/js/3.e88f59e6.js"><link rel="prefetch" href="/assets/js/4.24aaf822.js"><link rel="prefetch" href="/assets/js/5.0f611b7f.js"><link rel="prefetch" href="/assets/js/6.148a2419.js"><link rel="prefetch" href="/assets/js/7.1ab69c09.js"><link rel="prefetch" href="/assets/js/8.c66ae691.js"><link rel="prefetch" href="/assets/js/9.4438a384.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.35bcedcf.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">林小辉的blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="https://www.zhihu.com/column/linxiaohui" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  知乎
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><a href="https://github.com/linpenghui958" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="https://www.zhihu.com/column/linxiaohui" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  知乎
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><a href="https://github.com/linpenghui958" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Flutter相关</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/flutter/Flutter零基础介绍.html" class="sidebar-link">Flutter介绍</a></li><li><a href="/flutter/Futter插件管理之Pigeon.html" class="sidebar-link">/flutter/Futter插件管理之Pigeon.html</a></li><li><a href="/flutter/Flutter FPS 监控.html" class="active sidebar-link">如何获取Flutter APP的FPS</a></li><li><a href="/flutter/本地编译FlutterEngine.html" class="sidebar-link">本地编译FlutterEngine</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Vue2.0</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>面试</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>JavaScript</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>其他</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="如何获取flutter-app的fps"><a href="#如何获取flutter-app的fps" class="header-anchor">#</a> 如何获取Flutter APP的FPS</h3> <p>众所周知，我们需要衡量一个APP的性能数据，其中FPS也作为其中一个非常重要的标准。</p> <p>这里我们了解一下如何获取Flutter应用中的FPS性能数据。</p> <h3 id="fps是什么"><a href="#fps是什么" class="header-anchor">#</a> FPS是什么</h3> <p><strong>帧率</strong>是用于测量显示帧数的<a href="https://zh.wikipedia.org/wiki/%E9%87%8F%E5%BA%A6" target="_blank" rel="noopener noreferrer">量度<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>，可产生的图像的数量
+计量单位是帧/秒（Frame Per Second，FPS）
+通常是评估硬件性能与游戏体验流畅度的指标</p> <h3 id="flutter的渲染过程"><a href="#flutter的渲染过程" class="header-anchor">#</a> Flutter的渲染过程</h3> <p>Flutter 关注如何尽可能快地在两个硬件时钟的 VSync 信号之间计算并合成视图数据，然后通过 Skia 交给 GPU 渲染：UI 线程使用 Dart 来构建视图结构数据，这些数据会在 GPU 线程进行图层合成，随后交给 Skia 引擎加工成 GPU 数据，而这些数据会通过 OpenGL 最终提供给 GPU 渲染</p> <p><img src="http://km.oa.com/files/photos/pictures/202008/1597306977_34_w1870_h450.png" alt="img"></p> <h3 id="本地调试获取fps"><a href="#本地调试获取fps" class="header-anchor">#</a> 本地调试获取FPS</h3> <p>官方提供了许多在开发Flutter APP的过程中查看FPS等性能的工具。</p> <ul><li><p><a href="https://github.com/flutter/devtools" target="_blank" rel="noopener noreferrer">devtool<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p>DevTool 的 [Timeline] 界面可以让开发者逐帧分析应用的 UI 性能，具体的使用方式可以看一下<a href="https://flutter.dev/docs/perf/rendering/ui-performance" target="_blank" rel="noopener noreferrer">官方文档<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p></li> <li><p>性能图层</p></li></ul> <p><img src="https://flutter.cn/assets/tools/devtools/performance-overlay-green-bb41b466cf6bcd529b285e1510b638086fc5afb8921b8ac5a6565dee5bc44788.png" alt="Screenshot of overlay showing zero jank"></p> <p>在这些工具中我们只能在本地开发过程中获取FPS数据，如果要统计线上用户的真实数据，要在Flutter代码中计算FPS又该如何做呢？</p> <h3 id="生成环境获取fps"><a href="#生成环境获取fps" class="header-anchor">#</a> 生成环境获取FPS</h3> <h4 id="flutter相关性能指标定义"><a href="#flutter相关性能指标定义" class="header-anchor">#</a> Flutter相关性能指标定义</h4> <p>在阅读官方文档的时候，有一个<a href="https://api.flutter.dev/flutter/dart-ui/FrameTiming-class.html" target="_blank" rel="noopener noreferrer">FrameTiming<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>类描述了每一帧的时间相关的性能指标。</p> <blockquote><p>If you're using the whole Flutter framework, please use <a href="https://api.flutter.dev/flutter/scheduler/SchedulerBinding/addTimingsCallback.html" target="_blank" rel="noopener noreferrer">SchedulerBinding.addTimingsCallback<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> to get this. It's preferred over using <a href="https://api.flutter.dev/flutter/dart-ui/Window/onReportTimings.html" target="_blank" rel="noopener noreferrer">Window.onReportTimings<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> directly because <a href="https://api.flutter.dev/flutter/scheduler/SchedulerBinding/addTimingsCallback.html" target="_blank" rel="noopener noreferrer">SchedulerBinding.addTimingsCallback<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> allows multiple callbacks. If <a href="https://api.flutter.dev/flutter/scheduler/SchedulerBinding-mixin.html" target="_blank" rel="noopener noreferrer">SchedulerBinding<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> is unavailable, then see <a href="https://api.flutter.dev/flutter/dart-ui/Window/onReportTimings.html" target="_blank" rel="noopener noreferrer">Window.onReportTimings<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> for how to get this.</p></blockquote> <p>这里更推荐使用SchedulerBinding.addTimingsCallBack来获取FPS相关数据。该回调允许多个回调方法，如果该方法不可用才考虑使用Window.onReportTimings。</p> <h4 id="性能数据获取"><a href="#性能数据获取" class="header-anchor">#</a> 性能数据获取</h4> <p>这里看一下文档中<a href="https://api.flutter.dev/flutter/scheduler/SchedulerBinding/addTimingsCallback.html" target="_blank" rel="noopener noreferrer">addTimingsCallback<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>的定义。</p> <blockquote><p>Add a <a href="https://api.flutter.dev/flutter/dart-ui/TimingsCallback.html" target="_blank" rel="noopener noreferrer">TimingsCallback<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> that receives <a href="https://api.flutter.dev/flutter/dart-ui/FrameTiming-class.html" target="_blank" rel="noopener noreferrer">FrameTiming<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> sent from the engine.</p></blockquote> <p>添加一个TimingsCallback从engine接受发送的FrameTiming信息。接下来看一下具体代码中的定义，了解一下如何使用该方法。</p> <p><code>flutter/src/scheduler/binding.dart</code></p> <div class="language-dart extra-class"><pre class="language-dart"><code><span class="token keyword">void</span> <span class="token function">addTimingsCallback</span><span class="token punctuation">(</span>TimingsCallback callback<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    _timingsCallbacks<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>callback<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>_timingsCallbacks<span class="token punctuation">.</span>length <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">assert</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>onReportTimings <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      window<span class="token punctuation">.</span>onReportTimings <span class="token operator">=</span> _executeTimingsCallbacks<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">assert</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>onReportTimings <span class="token operator">==</span> _executeTimingsCallbacks<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+</code></pre></div><p>这里就是对window.onReportTimings的处理进行了封装了。首先用一个叫_timingsCallbacks的List保存了添加的回调，然后初始化时给window.onReportTimings赋值_executeTimingsCallbacks方法。这里_executeTimingsCallbacks会对前面保存的回调List进行遍历执行。</p> <p>知道了addTimingsCallback做了什么，我们再看一下这里callback的定义。</p> <p><code>sky_engine/ui/window.dart</code></p> <div class="language-dart extra-class"><pre class="language-dart"><code><span class="token comment">/// {@template dart.ui.TimingsCallback.list}</span>
+<span class="token comment">/// The callback takes a list of [FrameTiming] because it may not be</span>
+<span class="token comment">/// immediately triggered after each frame. Instead, Flutter tries to batch</span>
+<span class="token comment">/// frames together and send all their timings at once to decrease the</span>
+<span class="token comment">/// overhead (as this is available in the release mode). The list is sorted in</span>
+<span class="token comment">/// ascending order of time (earliest frame first). The timing of any frame</span>
+<span class="token comment">/// will be sent within about 1 second (100ms if in the profile/debug mode)</span>
+<span class="token comment">/// even if there are no later frames to batch. The timing of the first frame</span>
+<span class="token comment">/// will be sent immediately without batching.</span>
+<span class="token comment">/// {@endtemplate}</span>
+<span class="token keyword">typedef</span> TimingsCallback <span class="token operator">=</span> <span class="token keyword">void</span> <span class="token keyword">Function</span><span class="token punctuation">(</span>List<span class="token operator">&lt;</span>FrameTiming<span class="token operator">&gt;</span> timings<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>上方的注释写到，这个回调接受一个FrameTiming的List，Flutter会尝试将这些帧合并后一次性发送，以减少开销。正常情况下一秒内会发送完所有帧，如果在profile/debug模式下，时间会缩短到100毫秒内。</p> <p>简而言之，callback将会得到一个<strong>FrameTiming的List</strong>。</p> <h4 id="具体信息分析"><a href="#具体信息分析" class="header-anchor">#</a> 具体信息分析</h4> <p>这里知道在回调中可以拿到的是FrameTiming了，接下来看一下，如果通过这个帧信息可以获取到那些信息呢。</p> <p><code>sky_engine/ui/window.dart</code></p> <div class="language- extra-class"><pre class="language-text"><code>class FrameTiming {
+  /// 使用以微秒为单位的原始时间戳来构造[FrameTiming]
+  ///
+  /// 这个构建函数仅在单元测试中使用，如果需要获取真实的[FrameTiming]数据请通过[Window.onReportTimings]中获取
+  factory FrameTiming({
+    required int vsyncStart,
+    required int buildStart,
+    required int buildFinish,
+    required int rasterStart,
+    required int rasterFinish,
+  }) {
+    return FrameTiming._(&lt;int&gt;[
+      vsyncStart,
+      buildStart,
+      buildFinish,
+      rasterStart,
+      rasterFinish
+    ]);
+  }
+
+  /// Construct [FrameTiming] with raw timestamps in microseconds.
+  ///
+  /// [timestamps]List必须要有一个同样长度的[FramePhase.values]List
+
+  FrameTiming._(List&lt;int&gt; timestamps)
+      : assert(timestamps.length == FramePhase.values.length), _timestamps = timestamps;
+
+  int timestampInMicroseconds(FramePhase phase) =&gt; _timestamps[phase.index];
+
+  Duration _rawDuration(FramePhase phase) =&gt; Duration(microseconds: _timestamps[phase.index]);
+
+  /// 在UI线程上构建帧持续的时间。
+  ///
+  /// 构建开始的时机大概是当[Window.onBeginFrame]被调用时。[Window.onBeginFrame]回调中的[Duration]就是`Duration(microseconds: timestampInMicroseconds(FramePhase.buildStart))`
+  ///
+  /// 构建结束的时机大概是当[Window.render]被调用时。
+  ///
+  /// {@template dart.ui.FrameTiming.fps_smoothness_milliseconds}
+  /// 为了确保x fps平滑动画，这里的时间不应该超过1000/x毫秒。 （x即为fps值，例60， 120）
+  /// {@endtemplate}
+  /// {@template dart.ui.FrameTiming.fps_milliseconds}
+  /// 60fps约为16ms，120fps约为8ms;
+  /// {@endtemplate}
+  Duration get buildDuration =&gt; _rawDuration(FramePhase.buildFinish) - _rawDuration(FramePhase.buildStart);
+
+  /// 在GPU线程上光栅化帧的持续时间。
+  ///
+  /// {@macro dart.ui.FrameTiming.fps_smoothness_milliseconds}
+  /// {@macro dart.ui.FrameTiming.fps_milliseconds}
+  Duration get rasterDuration =&gt; _rawDuration(FramePhase.rasterFinish) - _rawDuration(FramePhase.rasterStart);
+
+  /// 在接收到vsync信号并开始构建该帧所花费的时间。
+  Duration get vsyncOverhead =&gt; _rawDuration(FramePhase.buildStart) - _rawDuration(FramePhase.vsyncStart);
+
+  /// 构建开始到栅格化结束的时间。
+  ///
+  /// 继续强调这里的时间不应该超过1000/x毫秒。
+  /// {@macro dart.ui.FrameTiming.fps_milliseconds}
+  ///
+  /// See also [vsyncOverhead], [buildDuration] and [rasterDuration].
+  Duration get totalSpan =&gt; _rawDuration(FramePhase.rasterFinish) - _rawDuration(FramePhase.vsyncStart);
+
+  final List&lt;int&gt; _timestamps;  // in microseconds
+
+  String _formatMS(Duration duration) =&gt; '${duration.inMicroseconds * 0.001}ms';
+
+  @override
+  String toString() {
+    return '$runtimeType(buildDuration: ${_formatMS(buildDuration)}, rasterDuration: ${_formatMS(rasterDuration)}, vsyncOverhead: ${_formatMS(vsyncOverhead)}, totalSpan: ${_formatMS(totalSpan)})';
+  }
+}
+</code></pre></div><p>这里<code>FrameTiming</code>获取帧相关的时间，其实都是通过<code>FramePhase</code>上的属性来计算的。看一下该类的具体定义。</p> <div class="language- extra-class"><pre class="language-text"><code>/// 帧的生命周期中各个重要的时间点。
+/// [FrameTiming]记录了用于性能分析的每个阶段的时间戳。
+enum FramePhase {
+  /// 当接收到操作系统vsync信号的时间戳
+  /// See also [FrameTiming.vsyncOverhead].
+  vsyncStart,
+
+  /// 当UI线程开始绘制一个帧。
+  /// See also [FrameTiming.buildDuration].
+  buildStart,
+
+  /// 当UI线程结束帧的绘制。
+  /// See also [FrameTiming.buildDuration].
+  buildFinish,
+
+  /// 当GPU线程开始栅格化帧时。
+  /// See also [FrameTiming.rasterDuration].
+  rasterStart,
+
+  /// 当GPU线程完成栅格化帧时。
+  /// See also [FrameTiming.rasterDuration].
+  rasterFinish,
+}
+</code></pre></div><p>现在知道了如果获取最近<code>N个FrameTiming</code>和每个FrameTiming中所含有的时间戳信息，接下来看一下如果进行实际的FPS计算了。</p> <h4 id="计算fps"><a href="#计算fps" class="header-anchor">#</a> 计算FPS</h4> <p>理所当然的去想，我们可以获取<code>总帧数</code>(FrameTiming List的长度)，总共的<code>耗时</code>(尾帧时间减去首帧时间)。是不是轻而易举就能算出FPS了呢。</p> <div class="language-dart extra-class"><pre class="language-dart"><code>double <span class="token keyword">get</span> fps <span class="token punctuation">{</span>
+  int frames <span class="token operator">=</span> lastFrames<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+  <span class="token keyword">var</span> start <span class="token operator">=</span> lastFrames<span class="token punctuation">.</span>last<span class="token punctuation">.</span><span class="token function">timestampInMicroseconds</span><span class="token punctuation">(</span>FramePhase<span class="token punctuation">.</span>buildStart<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> end <span class="token operator">=</span> lastFrames<span class="token punctuation">.</span>first<span class="token punctuation">.</span><span class="token function">timestampInMicroseconds</span><span class="token punctuation">(</span>FramePhase<span class="token punctuation">.</span>rasterFinish<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> duration <span class="token operator">=</span> <span class="token punctuation">(</span>end <span class="token operator">-</span> start<span class="token punctuation">)</span> <span class="token operator">/</span> Duration<span class="token punctuation">.</span>microsecondsPerMillisecond<span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> frames <span class="token operator">*</span> Duration<span class="token punctuation">.</span>millisecondsPerSecond <span class="token operator">/</span> duration<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>这样算出来的结果完全对不上，这是为什么呢。</p> <p>其实，<code>window.onReportTimings</code> 只会在有帧被绘制时才有数据回调，换句话说，你没有和app发生交互、界面状态没有变化（setState）、没有定时刷布局（动画）等等没有新的帧产生，所以<code>lastFrames</code>里存的可能是分属不同“绘制时间段”的帧信息。</p> <p><strong>假设</strong>一秒最多绘制 60 帧，每帧消耗的时间 <code>frameInterval</code> 为：</p> <div class="language-dart extra-class"><pre class="language-dart"><code><span class="token keyword">const</span> REFRESH_RATE <span class="token operator">=</span> <span class="token number">60</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> frameInterval <span class="token operator">=</span> <span class="token keyword">const</span> <span class="token function">Duration</span><span class="token punctuation">(</span>microseconds<span class="token punctuation">:</span> Duration<span class="token punctuation">.</span>microsecondsPerSecond <span class="token operator">~/</span> REFRESH_RATE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>Flutter引擎每次在收到vsync信号的时候会去调用drawFrame方法，这里如果一帧所花费的时间超过<code>frameInterval</code>，则可能会出现丢帧的情况。</p> <p>并且如果<code>lastFrames</code>里面相邻的两个帧开始、结束时间相差过大</p> <div class="language-dart extra-class"><pre class="language-dart"><code>List<span class="token operator">&lt;</span>FrameTiming<span class="token operator">&gt;</span> framesSet <span class="token operator">=</span> <span class="token operator">&lt;</span>FrameTiming<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token comment">// 每帧耗时 先写死16.6ms</span>
+<span class="token keyword">static</span> double frameInterval <span class="token operator">=</span> <span class="token number">16600</span><span class="token punctuation">;</span>
+SchedulerBinding<span class="token punctuation">.</span>instance<span class="token punctuation">.</span><span class="token function">addTimingsCallback</span><span class="token punctuation">(</span><span class="token punctuation">(</span>List<span class="token operator">&lt;</span>FrameTiming<span class="token operator">&gt;</span> timings<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      timings<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>framesSet<span class="token punctuation">.</span>add<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment">// 当时间间隔大于1s，则计算一次FPS</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">shouldReport</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        startTime <span class="token operator">=</span> <span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">processor</span><span class="token punctuation">(</span>framesSet<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        framesSet <span class="token operator">=</span> <span class="token operator">&lt;</span>FrameTiming<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+double <span class="token function">processor</span><span class="token punctuation">(</span>List<span class="token operator">&lt;</span>FrameTiming<span class="token operator">&gt;</span> timings<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    int sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">final</span> FrameTiming timing <span class="token keyword">in</span> timings<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 计算渲染耗时</span>
+      <span class="token keyword">final</span> int duration <span class="token operator">=</span> timing<span class="token punctuation">.</span><span class="token function">timestampInMicroseconds</span><span class="token punctuation">(</span>FramePhase<span class="token punctuation">.</span>rasterFinish<span class="token punctuation">)</span> <span class="token operator">-</span>
+          timing<span class="token punctuation">.</span><span class="token function">timestampInMicroseconds</span><span class="token punctuation">(</span>FramePhase<span class="token punctuation">.</span>buildStart<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment">// 判断耗时是否在 Vsync 信号周期内</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>duration <span class="token operator">&lt;</span> frameInterval<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        sum <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 有丢帧，向上取整</span>
+        <span class="token keyword">final</span> int count <span class="token operator">=</span> <span class="token punctuation">(</span>duration <span class="token operator">/</span> frameInterval<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ceil</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        sum <span class="token operator">+=</span> count<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">final</span> double fps <span class="token operator">=</span> timings<span class="token punctuation">.</span>length <span class="token operator">/</span> sum <span class="token operator">*</span> <span class="token number">60</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> fps<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/flutter/Futter插件管理之Pigeon.html" class="prev">
+        /flutter/Futter插件管理之Pigeon.html
+      </a></span> <span class="next"><a href="/flutter/本地编译FlutterEngine.html">
+        本地编译FlutterEngine
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.5d71a1c6.js" defer></script><script src="/assets/js/2.c183a324.js" defer></script><script src="/assets/js/13.d9910249.js" defer></script>
+  </body>
+</html>
